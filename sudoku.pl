@@ -17,4 +17,4 @@ block([A,B,C|R1],[D,E,F|R2],[G,H,I|R3]) :-
 problem(Problem, Rows) :- Problem = Rows.
 
 
-solve(Problem, Rows) :- problem(Problem, Rows), sudoku(Rows), maplist(writeln, Rows).
+solve(Problem, Rows) :- problem(Problem, Rows), sudoku(Rows).
