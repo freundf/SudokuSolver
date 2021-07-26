@@ -37,6 +37,7 @@ class Sudoku:
         return string
 
     def read_problem(self):
+        self.problem[0][0] = "o"
         clear_console()
         print(self)
         for i in range(9):
@@ -46,11 +47,17 @@ class Sudoku:
                     self.problem[i][j] = int(number)
                 else:
                     self.problem[i][j] = "_"
+
+                if j != 8:
+                    self.problem[i][j + 1] = "o"
+                elif i != 8:
+                    self.problem[i + 1][0] = "o"
+
                 clear_console()
                 print(self)
 
     def solve(self):
-        problem = str(self.problem).replace("'_'", "_")
+        problem = str(self.problem).replace("'", "")
         try:
             sudoku = self.prolog.query("solve({}, Rows).".format(problem)).__next__()
             self.solution = sudoku["Rows"]
@@ -64,7 +71,7 @@ class Sudoku:
         else:
             self.problem = self.solution
             clear_console()
-            print("Solution: \n\n" + str(self))
+            print("Solution: \n" + str(self))
 
 
 if __name__ == "__main__":
